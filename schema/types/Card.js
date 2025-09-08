@@ -10,6 +10,10 @@ input cardInput {
     examiner:String!
     profile_pic:String
 }
+input objSearchInput {
+  attribute: String
+  value: String!,
+}    
 
 type cardListResponse {
     response:[cardFields]
@@ -48,5 +52,6 @@ type Mutation {
 type Query {
     cardList:cardListResponse
     findCardById(input:objIdInput):findCardByIdResponse
+    findCardBySearch(input:objSearchInput):findCardByIdResponse
 }
 `;

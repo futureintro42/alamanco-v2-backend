@@ -34,6 +34,12 @@ module.exports = {
           .findCardByID(args?.input?._id)
           .then((response) => resolve(response))
       ),
+    findCardBySearch: (_, args) =>
+      new Promise((resolve) =>
+        card
+          .findCardBySearch(args?.input?.attribute, args?.input?.value)
+          .then((response) => resolve(response))
+      ),     
     cardList: (_, __, context) =>
       new Promise((resolve) =>
         card.list(context).then((response) => resolve(response))

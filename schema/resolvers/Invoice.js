@@ -34,6 +34,12 @@ module.exports = {
           .findByID(args?.input?._id)
           .then((response) => resolve(response))
       ),
+    findInvoiceBySearch: (_, args) =>
+      new Promise((resolve) =>
+        invoice
+          .findInvoiceBySearch(args?.input?.attribute, args?.input?.value)
+          .then((response) => resolve(response))
+      ),
     invoiceList: (_, __, context) =>
       new Promise((resolve) =>
         invoice.list(context).then((response) => resolve(response))

@@ -22,6 +22,11 @@ input invoiceInput {
     resultStatus:String!
 }
 
+input objSearchInput {
+  attribute: String
+  value: String!
+}
+
 type findInvoiceByIDResponse {
     message:String
     severity:String
@@ -70,6 +75,7 @@ type Mutation {
 }
 type Query {
     findInvoiceByID(input:objIdInput):findInvoiceByIDResponse
+    findInvoiceBySearch(input:objSearchInput):findInvoiceByIDResponse
     invoiceList:invoiceListResponse
 }
 `;

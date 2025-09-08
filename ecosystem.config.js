@@ -9,8 +9,9 @@ module.exports = {
         HOST: "localhost",
         PORT: 3500,
         // DB_CONNECTION: "mongodb://localhost:27017/safetydb",
-        DB_CONNECTION:
-          "mongodb+srv://iphtekhar:iphtekhar321@cluster0.qcujyoi.mongodb.net/new-alamanco?retryWrites=true&w=majority",
+        // DB_CONNECTION:
+        //   "mongodb+srv://iphtekhar:iphtekhar321@cluster0.qcujyoi.mongodb.net/new-alamanco?retryWrites=true&w=majority",
+        DB_CONNECTION: "mongodb+srv://mhddanish111:A3c4LPGOHLD2oA6w@cluster0.mda3rih.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0",
         SECERET_KEY: "anyrandomstring",
         TOKEN_EXPIRE_IN: "1d",
       },

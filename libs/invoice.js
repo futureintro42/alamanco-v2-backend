@@ -156,6 +156,58 @@ module.exports = {
       }
     });
   },
+  findInvoiceBySearch(attribute, value) {
+    return new Promise(async (resolve) => {
+      try {
+        const query = { [attribute]: value}
+        const { error, data } = await commonFunc.findByAttribute(
+            query,
+            Invoice
+          );
+
+          if (error || !data) {
+            return resolve({
+              severity: "error",
+              message: "Sorry, Record does not exist.",
+              response: null,
+            });
+          } else {
+            const userRes = await commonFunc.findByAttribute(
+              { id: parseInt(data.fk_user_id) },
+              User
+            );
+            const user = `${
+              !userRes.error && userRes.data
+                ? userRes.data.first_name + " " + userRes.data.last_name
+                : ""
+            }`;
+            return resolve({
+              severity: "success",
+              message: "",
+              response: {
+                ...data._doc,
+                inspection_date: moment(data.inspection_date).format(
+                  "YYYY-MM-DD"
+                ),
+                inspection_next_date: moment(data.inspection_next_date).format(
+                  "YYYY-MM-DD"
+                ),
+                createdAt: moment(data.createdAt).format("YYYY-MM-DD"),
+                updatedAt: moment(data.updateddAt).format("YYYY-MM-DD"),
+                user,
+              },
+            });
+          }
+      } catch (error) {
+        console.error(error);
+        return resolve({
+          severity: "error",
+          message: "Something went wrong!",
+          response: null,
+        });
+      }
+    });
+  },
   list(context) {
     return new Promise(async (resolve) => {
       const { type } = await auth.fetchUserType(context);

@@ -178,6 +178,44 @@ module.exports = {
       }
     });
   },
+  findCardBySearch(attribute, value) {
+    return new Promise(async (resolve) => {
+      try {
+        const query = { [attribute]: value };
+        const { error, data } = await commonFunc.findByAttribute(
+          query,
+          Card
+        );
+
+        if (error || !data) {
+          return resolve({
+            severity: "error",
+            message: "Sorry, Record does not exist.",
+            response: null,
+          });
+        } else {
+          return resolve({
+            severity: "success",
+            message: "",
+            response: {
+              ...data._doc,
+              issue_date: moment(data.issue_date).format("YYYY-MM-DD"),
+              expiry_date: moment(data.expiry_date).format("YYYY-MM-DD"),
+              createdAt: moment(data.createdAt).format("YYYY-MM-DD"),
+              updateddAt: moment(data.updateddAt).format("YYYY-MM-DD"),
+            },
+          });
+        }
+      } catch (error) {
+        console.error(error);
+        return resolve({
+          severity: "error",
+          message: "Something went wrong!",
+          response: null,
+        });
+      }
+    });
+  },
   list(context) {
     return new Promise(async (resolve) => {
       const { type } = await auth.fetchUserType(context);
