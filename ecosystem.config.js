@@ -21,7 +21,7 @@ module.exports = {
         HOST: "localhost",
         PORT: 3600,
         //DB_CONNECTION: "mongodb://0.0.0.0:27017/prodIscedb",
-        DB_CONNECTION: "mongodb+srv://mhddanish111:A3c4LPGOHLD2oA6w@cluster0.mda3rih.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0",
+        DB_CONNECTION: "mongodb://alamancom:Alamancom123@localhost:27017/prodIscedb",
         SECERET_KEY: "anyrandomstring",
         TOKEN_EXPIRE_IN: "1d",
       },
