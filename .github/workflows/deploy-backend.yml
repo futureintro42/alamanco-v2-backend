@@ -1,0 +1,30 @@
+name: Deploy Backend
+
+on:
+  push:
+    branches:
+      - main   # or your backend branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Set up SSH key
+        run: |
+          echo "${{ secrets.SERVER_SSH_KEY }}" > private_key
+          chmod 600 private_key
+          eval "$(ssh-agent -s)"
+          ssh-add private_key
+
+      - name: Deploy backend to server
+        run: |
+          ssh -o StrictHostKeyChecking=no ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} "
+            cd ~/alamanco-v2-backend &&
+            git pull origin main &&
+            npm install &&
+            pm2 restart ecosystem.config.js --env production
+          "
